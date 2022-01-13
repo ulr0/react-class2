@@ -5,6 +5,7 @@ import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstr
 import './App.css';
 import Data from './data.js';
 import Detail from './Detail.js';
+import axios from 'axios';
 
 // 'react-router-dom' install 후 import
 import { Link, Route, Switch } from 'react-router-dom';
@@ -81,7 +82,27 @@ function App() {
           <div>아무거나 적었을 때</div>
         </Route> */}
 
+        
+
       </Switch>
+
+      <button className="btn btn-primary" onClick={()=>{
+
+        // axios.post('url', { id : test, pw : 1234 }); // post 요청
+    
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((result)=>{
+          // console.log(result.data);
+          // var newShoes = [...shoes];
+          // var newArray = newShoes.concat(result.data);
+          // setShoes(newArray);
+          setShoes( [...shoes, ...result.data] );
+          })
+        .catch(()=>{
+          console.log('실패')
+        })
+
+        }}>더보기</button>
     
     </div>
   );
