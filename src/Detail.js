@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import './Detail.scss'
 
 // styled-component : CSS를 미리 입혀놓은 component를 만든다.
 let 박스 = styled.div`
@@ -32,9 +33,14 @@ function Detail(props){
     return (
       <div className="container">
         <박스>
-            <제목 color='pink'>Detail</제목>
+            <제목 className="pink">Detail</제목>
             {/* <제목 color='blue'>Detail</제목> */}
         </박스>
+
+        <div className="my-alert-yellow">
+            <p>재고가 얼마 남지 않았습니다.</p>
+        </div>
+
         <div className="row">
           <div className="col-md-6">
           <img src={ 'https://codingapple1.github.io/shop/shoes' + ( product.id + 1 ) + '.jpg' } width="100%"/>

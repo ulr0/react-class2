@@ -1,0 +1,53 @@
+// SASS 문법 2. @import 파일경로
+// @import './_reset.scss';
+
+
+// SASS 문법 1. 변수에 데이터 저장해서 사용
+// $변수명 : 변수에 넣을 값
+$mainColor : #f09ed7;
+
+.pink{
+    color : $mainColor;
+}
+
+// div.container h4 {
+//     color : blue;
+// }
+// div.container p {
+//     color : green;
+// }
+
+// SASS 문법 3. 셀렉터 대신 쓰는 nesting
+// div.container {
+//     h4 {
+//         color: blue;
+//     }
+//     p {
+//         color : green;
+//     }
+// }
+
+
+// SASS 문법 5. 함순는 @mixin / @include
+@mixin 함수() {
+    background: #eeeeee;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.my-alert {
+    @include 함수() // SASS 문법 4. 함수 가져올 땐 @include
+}
+
+// SASS 문법 4. 복붙하지 말고 @extend
+.my-alert-yellow {
+    @extend .my-alert;
+    background: #ffe591;
+}
+
+.my-alert p {
+    margin-bottom: 0;
+}
