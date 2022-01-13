@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import './App.css';
-
 import Data from './data.js'
+
+// 'react-router-dom' install 후 import
+import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
 
@@ -32,28 +34,53 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className="jumbotron">
-        <h1>20% Season Off</h1>
-        <p>
-          This is a simple hero unit, a simple Jumbotron-style component 
-          for calling extra attention to featured content or informaion.
-        </p>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p>
-      </div>
+      
+      {/* Router 사용
+          <Router path="/path"> HTML </Router>
+          exact 속성은 경로가 정확히 일치할 때만 내용 보여줌 
+          HTML을 Component로 만들어서 깔끔하게 사용하는 방법 
+          <Route path="/a" component={Modal}></Route> */}
+      <Route exact path="/">
+        <div>
 
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map( (a, i)=>{
-              return <Card shoes = { a } i = { i } key = { i }/>
-            })
-          }
+          <div className="jumbotron">
+            <h1>20% Season Off</h1>
+            <p>
+              This is a simple hero unit, a simple Jumbotron-style component 
+              for calling extra attention to featured content or informaion.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </div>
 
+          <div className="container">
+            <div className="row">
+              {
+                shoes.map( (a, i)=>{
+                  return <Card shoes = { a } i = { i } key = { i }/>
+                })
+              }
+            </div>
+          </div>
+          
         </div>
-      </div>
-
+      </Route>
+      <Route exact path="/detail">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%"/>
+            </div>
+            <div className="col-md-6 mt-4">
+              <h4 className="pt-5">상품명</h4>
+              <p>상품설명</p>
+              <p>가격</p>
+              <button className="btn btn-danger">주문하기</button>
+            </div>
+          </div>
+        </div>
+      </Route>
     
     </div>
   );
