@@ -9,7 +9,7 @@ function Cart(props){
             <Table responsive>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>상품 id</th>
                         <th>상품명</th>
                         <th>수량</th>
                         <th>변경</th>
@@ -20,10 +20,13 @@ function Cart(props){
                         props.state.map((a, i)=>{
                             return (
                                 <tr key={i}>
-                                    <td>1</td>
+                                    <td>{ a.id }</td>
                                     <td>{ a.name }</td>
-                                    <td>{ a.quan}</td>
-                                    <td>Table cell</td>
+                                    <td>{ a.quan }</td>
+                                    <td>
+                                        <button onClick={()=>{ props.dispatch({ type : '수량증가' }) }}>+</button>
+                                        <button onClick={()=>{ props.dispatch({ type : '수량감소' }) }}>-</button>
+                                    </td>
                                 </tr>
                             )
                         })
