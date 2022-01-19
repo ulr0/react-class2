@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss'
+import { stockContext } from './App.js';
 
 // styled-component : CSS를 미리 입혀놓은 component를 만든다.
 let 박스 = styled.div`
@@ -33,6 +34,8 @@ function Detail(props){
     
     let [alert, setAlert] = useState(true);
     let [input, setInput] = useState('');
+
+    let stock = useContext(stockContext);
 
     // useEffect Hook
     // component가 mount 할 때, component가 update 될 때 특정 코드를 실행할 수 있다.

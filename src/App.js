@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js';
@@ -10,9 +10,13 @@ import axios from 'axios';
 // 'react-router-dom' install 후 import
 import { Link, Route, Switch } from 'react-router-dom';
 
+
+export let stockContext = React.createContext();
+
 function App() {
 
   let [shoes, setShoes] = useState(Data);
+  let [stock, setStock] = useState([10,11,12]);
 
   return (
     <div className="App">
@@ -23,7 +27,7 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
+              <Nav.Link as={Link} to="/detail/1">Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -62,6 +66,8 @@ function App() {
             </div>
 
             <div className="container">
+
+              <stockContext.Provider value={stock}>
               <div className="row">
                 {
                   shoes.map( (a, i)=>{
@@ -69,13 +75,17 @@ function App() {
                   })
                 }
               </div>
+              </stockContext.Provider>
+
             </div>
 
           </div>
         </Route>
         
         <Route path="/detail/:id">
+          <stockContext.Provider value={stock}>
           <Detail shoes={shoes}/>
+          </stockContext.Provider>
         </Route>
         
         {/* <Route path="/:id">
@@ -92,7 +102,7 @@ function App() {
     
         axios.get('https://codingapple1.github.io/shop/data2.json')
         .then((result)=>{
-          // console.log(result.data);
+          console.log(result);
           // var newShoes = [...shoes];
           // var newArray = newShoes.concat(result.data);
           // setShoes(newArray);
@@ -109,11 +119,15 @@ function App() {
 }
 
 function Card(props){
+
+  let stock = useContext(stockContext);
+
   return(
-    <div className="col-md-4">
+    <div className="col-xs">
       <img src={ 'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg' } width="100%" />
       <h4> { props.shoes.title } </h4>
       <p> { props.shoes.content } & { props.shoes.price } </p>
+      {stock[props.i]}
     </div>
   )
 }
