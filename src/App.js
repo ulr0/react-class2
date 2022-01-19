@@ -76,6 +76,23 @@ function App() {
                 }
               </div>
               </stockContext.Provider>
+              <button className="btn btn-primary" onClick={()=>{
+
+                // axios.post('url', { id : test, pw : 1234 }); // post 요청
+
+                axios.get('https://codingapple1.github.io/shop/data2.json')
+                .then((result)=>{
+                  console.log(result);
+                  // var newShoes = [...shoes];
+                  // var newArray = newShoes.concat(result.data);
+                  // setShoes(newArray);
+                  setShoes( [...shoes, ...result.data] );
+                  })
+                .catch(()=>{
+                  console.log('실패')
+                })
+
+                }}>더보기</button>
 
             </div>
 
@@ -96,24 +113,6 @@ function App() {
 
       </Switch>
 
-      <button className="btn btn-primary" onClick={()=>{
-
-        // axios.post('url', { id : test, pw : 1234 }); // post 요청
-    
-        axios.get('https://codingapple1.github.io/shop/data2.json')
-        .then((result)=>{
-          console.log(result);
-          // var newShoes = [...shoes];
-          // var newArray = newShoes.concat(result.data);
-          // setShoes(newArray);
-          setShoes( [...shoes, ...result.data] );
-          })
-        .catch(()=>{
-          console.log('실패')
-        })
-
-        }}>더보기</button>
-    
     </div>
   );
 }

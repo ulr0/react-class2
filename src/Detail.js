@@ -3,6 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss'
 import { stockContext } from './App.js';
+import { Nav } from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
 
 // styled-component : CSS를 미리 입혀놓은 component를 만든다.
 let 박스 = styled.div`
@@ -36,6 +38,9 @@ function Detail(props){
     let [input, setInput] = useState('');
 
     let stock = useContext(stockContext);
+
+    let [tabNumber, setTabNumber] = useState(0);
+    let [tabSwitch, setTabSwitch] = useState(false);
 
     // useEffect Hook
     // component가 mount 할 때, component가 update 될 때 특정 코드를 실행할 수 있다.
@@ -102,8 +107,38 @@ function Detail(props){
             } }>뒤로가기</button>
           </div>
         </div>
+          
+        <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+          <Nav.Item>
+            <Nav.Link eventKey="link-0" onClick={()=>{setTabSwitch(false); setTabNumber(0)}}>Active</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-1" onClick={()=>{setTabSwitch(false); setTabNumber(1)}}>Option 2</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        
+        <CSSTransition in={tabSwitch} classNames="wow" timeout={500}>
+          <TabContent tabNumber={tabNumber} setTabSwitch={setTabSwitch}/>
+        </CSSTransition>
+
       </div>
     )
   }
+
+function TabContent(props){
+
+  useEffect(()=>{
+    props.setTabSwitch(true);
+  });
+  
+  if (props.tabNumber === 0) {
+    return <div>0번째 탭</div>
+  } else if (props.tabNumber === 1) {
+    return <div>1번째 탭</div>
+  } else if (props.tabNumber === 2) {
+    return <div>2번째 탭</div>
+  }
+
+}
 
 export default Detail;
