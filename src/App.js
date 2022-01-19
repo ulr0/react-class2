@@ -6,6 +6,7 @@ import './App.css';
 import Data from './data.js';
 import Detail from './Detail.js';
 import axios from 'axios';
+import Cart from './Cart.js';
 
 // 'react-router-dom' install 후 import
 import { Link, Route, Switch } from 'react-router-dom';
@@ -109,7 +110,10 @@ function App() {
           <div>아무거나 적었을 때</div>
         </Route> */}
 
-        
+        <Route path="/cart">
+          <Cart></Cart>
+        </Route>
+
 
       </Switch>
 
