@@ -7,7 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
+
+let onAlert = true;
+
+function reducer2(state = onAlert, action){
+  if ( action.type === 'off' ) {
+    state = false;
+    return state 
+  } else {
+    return state
+  }
+}
 
 let baseState = [
   { id : 0, name : '멋진 신발', quan : 2 },
@@ -43,7 +54,8 @@ function reducer(state = baseState, action){
   }
 }
 
-let store = createStore(reducer);
+// reducer 여러 개 담기
+let store = createStore(combineReducers({reducer, reducer2}));
 
 
 ReactDOM.render(

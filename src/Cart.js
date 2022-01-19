@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import './Cart.css';
 
 function Cart(props){
 
@@ -33,6 +34,18 @@ function Cart(props){
                     }
                 </tbody>
             </Table>
+            {   // 여러 컴포넌트에 쓰이지 않는 이런 종류의 state 는
+                // redux store에 저장하지 않고
+                // useState 사용하는 게 좋다.
+                props.onAlert === true
+                ? ( <div className="my-alert2">
+                        <p>지금 구매하시면 신규 할인 20%</p>
+                        <button onClick={()=>{ props.dispatch({ type : 'off'}) }}>닫기</button>
+                    </div>)
+                : null
+            }
+            
+
         </div>
 
     )
@@ -41,7 +54,8 @@ function Cart(props){
 // store 안의 state 데이터를 가져와서 props로 변환해주는 함수
 function stateToProps(state){
     return {
-        state : state 
+        state : state.reducer,
+        onAlert : state.reducer2
     }
 }
 
