@@ -6,8 +6,6 @@ import './Cart.css';
 function Cart(props){
 
     let state = useSelector((state) => state.reducer);
-    console.log(state);
-
     let dispatch = useDispatch();
 
     return(
@@ -30,8 +28,8 @@ function Cart(props){
                                     <td>{ a.name }</td>
                                     <td>{ a.quan }</td>
                                     <td>
-                                        <button onClick={()=>{ dispatch({ type : '수량증가' }) }}>+</button>
-                                        <button onClick={()=>{ dispatch({ type : '수량감소' }) }}>-</button>
+                                        <button onClick={()=>{ dispatch({ type : '수량증가', payload : a.id }) }}>+</button>
+                                        <button onClick={()=>{ dispatch({ type : '수량감소', payload : a.id }) }}>-</button>
                                     </td>
                                 </tr>
                             )

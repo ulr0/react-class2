@@ -101,7 +101,7 @@ function Detail(props){
             <p>{product.content}</p>
             <p>{product.price}</p>
             <button className="btn btn-danger" onClick={()=>{ 
-              props.dispatch({ type : '항목추가', payload : { id : 2, name : '새로운 상품', quan : 1 }});
+              props.dispatch({ type : '항목추가', payload : { id : product.id, name : product.title, quan : 1 }});
               history.push('/cart');
               }}>주문하기</button>
             &nbsp;
