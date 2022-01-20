@@ -5,6 +5,7 @@ import './Detail.scss'
 import { stockContext } from './App.js';
 import { Nav } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
 
 // styled-component : CSS를 미리 입혀놓은 component를 만든다.
 let 박스 = styled.div`
@@ -99,7 +100,11 @@ function Detail(props){
             <h4 className="pt-5">{product.title}</h4>
             <p>{product.content}</p>
             <p>{product.price}</p>
-            <button className="btn btn-danger">주문하기</button>
+            <button className="btn btn-danger" onClick={()=>{ 
+              props.dispatch({ type : '항목추가', payload : { id : 2, name : '새로운 상품', quan : 1 }});
+              history.push('/cart');
+              }}>주문하기</button>
+            &nbsp;
             <button className="btn btn-danger" onClick={ ()=>{
                 history.goBack();
                 {/* 특정 경로로 이동시키려면
@@ -141,4 +146,13 @@ function TabContent(props){
 
 }
 
-export default Detail;
+function stateToProps(state){
+  return {
+      state : state.reducer,
+      onAlert : state.reducer2
+  }
+}
+
+export default connect(stateToProps)(Detail)
+
+// export default Detail;

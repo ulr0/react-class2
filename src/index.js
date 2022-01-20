@@ -31,7 +31,13 @@ let baseState = [
 // parameter state = 초기값
 // parameter action = 데이터가 수정되는 조건
 function reducer(state = baseState, action){
-  if ( action.type === '수량증가' ) {
+  if( action.type === '항목추가' ){
+
+    let copy = [...baseState];
+    copy.push(action.payload);
+    return copy
+
+  } else if ( action.type === '수량증가' ) {
 
     let copy = [...baseState];
     copy[0].quan++;
