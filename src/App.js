@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useContext, useState, lazy, Suspense } from 'react';
+import React, { useContext, useState, lazy, Suspense, useEffect } from 'react';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js';
@@ -142,4 +142,28 @@ function Card(props){
   )
 }
 
+function Parent(props){
+  return (
+    <div>
+      <Child1 이름={props.이름}></Child1>
+      <Child2 나이={props.나이}></Child2>
+    </div>
+  )
+}
+
+function Child1(props){
+  useEffect(()=>{ console.log('렌더링됨1') });
+  return <div>11111</div>
+}
+
+function Child2(props){
+  useEffect(()=>{ console.log('렌더링됨2') });
+  return <div>22222</div>
+}
+
+
+
+
+
 export default App;
+

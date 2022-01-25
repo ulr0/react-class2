@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, memo } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import './Cart.css';
@@ -47,12 +47,39 @@ function Cart(props){
                     </div>)
                 : null
             }
+
+            <Parent 이름='안녕1' 나이='30'></Parent>
             
 
         </div>
 
     )
 }
+
+
+// memo() 불필요한 재렌더링 막을 수 있음
+// 컴포넌트와 관련된 props가 변경될 때만 재렌더링
+function Parent(props){
+    return (
+    <div>
+        <Child1 이름={props.이름}></Child1>
+        <Child2 나이={props.나이}></Child2>
+    </div>
+    )
+}
+
+function Child1(){
+    useEffect(()=>{ console.log('렌더링됨1') });
+    return <div>11111</div>
+}
+
+let Child2 = memo(function(){
+    useEffect(()=>{ console.log('렌더링됨2') });
+    return <div>22222</div>
+});
+
+
+
 
 // store 안의 state 데이터를 가져와서 props로 변환해주는 함수
 // function stateToProps(state){
