@@ -1,10 +1,12 @@
 /* eslint-disable */
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, lazy, Suspense } from 'react';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js';
-import Detail from './Detail.js';
+// import Detail from './Detail.js';
+// Detail 컴포넌트가 필요한 순간에 import
+let Detail = lazy(()=> import('./Detail.js') );
 import axios from 'axios';
 import Cart from './Cart.js';
 
@@ -103,7 +105,9 @@ function App() {
         
         <Route path="/detail/:id">
           <stockContext.Provider value={stock}>
-          <Detail shoes={shoes}/>
+            <Suspense fallback={<div>loading...</div>}>
+              <Detail shoes={shoes}/>
+            </Suspense>
           </stockContext.Provider>
         </Route>
         
